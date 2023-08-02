@@ -1,0 +1,30 @@
+{
+	"name": "slidev-template",
+	"private": true,
+	"scripts": {
+		"build": "slidev build",
+		"dev": "slidev --remote",
+		"dev:open": "slidev --open --remote",
+		"export:light": "slidev export",
+		"export:light:clicked": "slidev export --with-clicks",
+		"export:dark": "slidev export --dark",
+		"export:dark:clicked": "slidev export --dark --with-clicks"
+	},
+	"dependencies": {
+		"@mdi/font": "^7.2.96",
+		"@slidev/cli": "^0.42.6",
+		"@slidev/theme-default": "*",
+		"@slidev/theme-seriph": "*",
+		"roboto-fontface": "*",
+		"vue3-lottie": "^3.0.0",
+		"vuetify": "^3.3.11",
+		"webfontloader": "^1.6.28"
+	},
+	"devDependencies": {
+		"@vitejs/plugin-vue": "^3.2.0",
+		"playwright-chromium": "^1.36.2",
+		"vite": "^3.2.7",
+		"vite-plugin-vuetify": "^1.0.0",
+		"vue-cli-plugin-vuetify": "^2.5.8"
+	}
+}
