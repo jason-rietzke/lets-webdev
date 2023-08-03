@@ -1,10 +1,9 @@
 name: Deploy Pages
 
 on:
-    # Uncomment the following line to deploy on push to main branch
-    # push:
-    #     branches:
-    #         - main
+    push:
+        branches:
+            - main
     workflow_dispatch:
 
 jobs:
@@ -20,7 +19,7 @@ jobs:
             - name: Install slidev
               run: npm i -g @slidev/cli
             - name: Build
-              run: slidev build --base <repo-name> # <--- replace with your repo name
+              run: slidev build --base lets-webdev
             - name: Deploy pages
               uses: crazy-max/ghaction-github-pages@v2
               with:
