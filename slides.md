@@ -1,10 +1,11 @@
 ---
 theme: default
-aspectRatio: '16/9'
+aspectRatio: "16/9"
 lineNumbers: false
+download: true
 drawings:
-  persist: false
-title: LiveReader
+    persist: false
+title: Lets Webdev
 src: ./slides/cover.md
 ---
 
