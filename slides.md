@@ -10,8 +10,13 @@ src: ./slides/cover.md
 ---
 
 ---
+src: ./slides/about-me.md
+---
+
+---
 
 # Awsome Page
+
 Timeline Component
 
 <Timeline 
