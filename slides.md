@@ -14,16 +14,21 @@ src: ./slides/about-me.md
 ---
 
 ---
+src: ./slides/fundamentals.md
+---
 
-# Awsome Page
+---
+src: ./slides/client.md
+---
 
-Timeline Component
+---
+src: ./slides/javascript.md
+---
 
-<Timeline 
-	width="60%" 
-	:items="[
-		'Interesting Timeline Item',
-		'Some other interesting item',
-		'And another one',
-	]"
-/>
+---
+src: ./slides/modern-js.md
+---
+
+---
+src: ./slides/lets-webdev.md
+---
