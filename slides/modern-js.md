@@ -32,8 +32,27 @@ To use npm we need to install Node.js.
 <v-img src="./img/node.png" class="ml-18" width="300px" height="500px" />
 
 ---
+layout: two-cols
+---
 
-## Frameworks
+## Frameworks & Libraries
+
+Nowadays, there are a lot of frameworks and libraries that can be used to build web applications.
+
+Some of the most popular ones are:
+
+-   [React](https://reactjs.org)
+-   [Vue](https://vuejs.org)
+-   [Angular](https://angular.io)
+-   [Svelte](https://svelte.dev)
+
+These frameworks and libraries are used to build the user interface of web applications and provide a lot of useful features out of the box.
+
+They also bring their own ecosystem of packages that can be used to extend their functionality, allowing us to concentrate on the actual application logic.
+
+::right::
+
+<v-img src="./img/storing-books.png" class="ml-8" width="400px" height="500px" />
 
 ---
 
