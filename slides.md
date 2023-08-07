@@ -22,10 +22,6 @@ src: ./slides/client.md
 ---
 
 ---
-src: ./slides/javascript.md
----
-
----
 src: ./slides/modern-js.md
 ---
 
