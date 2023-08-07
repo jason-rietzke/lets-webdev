@@ -55,8 +55,42 @@ They also bring their own ecosystem of packages that can be used to extend their
 <v-img src="./img/storing-books.png" class="ml-8" width="400px" height="500px" />
 
 ---
+layout: two-cols
+---
 
 ## TypeScript
+
+[TypeScript](https://www.typescriptlang.org) is a superset of JavaScript that adds static typing to the language.
+
+Static typing means that the types of variables are known at compile time and can be checked to prevent errors.
+
+TypeScript needs to be transpiled to JavaScript before it can be executed in the browser since browsers only understand JavaScript.
+
+TypeScript is a great tool to prevent errors and to make code more readable and maintainable, especially in large code bases.
+
+::right::
+
+```js
+// JavaScript
+function add(a, b) {
+	return a + b;
+}
+
+const sum = add(1, 2);
+const sum = add(false, "hello"); // fine for JavaScript
+// but it causes problems at runtime
+```
+
+```ts
+// TypeScript
+function add(a: number, b: number): number {
+	return a + b;
+}
+
+const sum = add(1, 2);
+const sum = add(false, "hello"); // typescript error
+// the error is caught at transpile time
+```
 
 ---
 
