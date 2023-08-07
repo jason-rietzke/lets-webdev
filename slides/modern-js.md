@@ -93,5 +93,21 @@ const sum = add(false, "hello"); // typescript error
 ```
 
 ---
+layout: two-cols
+---
 
 ## Bundlers
+
+Bundlers are tools that allow to bundle JavaScript modules into a single file that can be executed in the browser.
+
+This allows us to manage the project to our liking and use the bundler to build the final application which can then be optimized for production.
+
+One of the most popular bundler tools is [vite](https://vitejs.dev). It is not only a bundler tool but also brings a lot of other useful features like:
+
+-   A development server
+-   TypeScript support
+-   Hot module replacement
+
+::right::
+
+<v-img src="./img/building-user-interface.png" class="ml-8" width="400px" height="500px" />
