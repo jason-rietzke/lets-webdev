@@ -51,15 +51,34 @@ npm install
 npm run dev
 ```
 
-
 ::right::
 
 <v-img src="./img/vite.png" class="ml-8" width="380px" height="500px" style="border-radius: 10px" />
 
 ---
 
-## Getting started
-
----
-
 ## Use Graphly D3
+
+To use [Graphly D3](https://docs.graphly.dev/guide/introduction/getting_started.html) in your project, install the package:
+
+```bash
+npm install @livereader/graphly-d3
+```
+
+Then, import the package in your code:
+
+```ts
+import { ForceSimulation } from "@livereader/graphly-d3";
+import "@livereader/graphly-d3/style.css";
+
+const mySVG = document.getElementById("mySVG");
+const simulation = new ForceSimulation(mySVG);
+
+const graph = {
+	nodes: [],
+	links: [],
+};
+simulation.render(graph);
+```
+
+Check out the [documentation](https://docs.graphly.dev) for more information.
