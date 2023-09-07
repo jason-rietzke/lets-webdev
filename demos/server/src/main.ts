@@ -12,8 +12,8 @@ app.get("/api/todos", (req, res) => {
 	res.json(todos);
 });
 app.post("/api/todos", (req, res) => {
-	const data = req.body;
-	fs.writeFileSync("data/todos.json", JSON.stringify(data));
+	const todos = req.body;
+	fs.writeFileSync("data/todos.json", JSON.stringify(todos));
 	res.sendStatus(200);
 });
 
