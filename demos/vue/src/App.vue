@@ -12,6 +12,11 @@ fetch("/api/todos", {
 	.then((res) => res.json())
 	.then((data) => (todos.value = data));
 
+const ws = new WebSocket(`ws://${location.host}/`);
+ws.onmessage = (event) => {
+	todos.value = JSON.parse(event.data);
+};
+
 function postTodos() {
 	fetch("/api/todos", {
 		method: "POST",
@@ -51,7 +56,7 @@ function clear() {
 <template>
 	<h1>TODO</h1>
 	<Item v-for="todo in todos" :key="todo.id" :item="todo" @toggle="toggleTodo" @remove="removeTodo" />
-	<input v-model="textInput" autofocus @keyup.enter="addTodo" />
+	<input v-model="textInput" type="text" autofocus @keyup.enter="addTodo" />
 	<button @click="addTodo">Add</button>
 	<button @click="clear">Clear</button>
 </template>
