@@ -53,5 +53,5 @@ function clear() {
 		<button @click="() => (view = 'graph')">Graph</button>
 	</div>
 	<List v-if="view == 'list'" :todos="todos" @add="add" @toggle="toggle" @remove="remove" @clear="clear" />
-	<Graph v-if="view == 'graph'" :todos="todos" />
+	<Graph v-if="view == 'graph'" :todos="todos" @toggle="toggle" />
 </template>
