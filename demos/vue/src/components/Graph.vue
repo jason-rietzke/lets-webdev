@@ -18,6 +18,7 @@ const graph: Graph = {
 	nodes: [],
 	links: [],
 };
+const positions: Map<string, { x: number; y: number }> = new Map();
 
 function renderGraph() {
 	simulation.value.draggableNodes;
@@ -30,9 +31,11 @@ function renderGraph() {
 				scale: 1,
 				url: "https://cdn.graphly.dev/@jason-rietzke/demo-hexagon/1.1.1",
 			},
+			x: 150,
+			y: 0,
 			anchor: {
 				type: "soft",
-				x: 0,
+				x: 150,
 				y: 0,
 			},
 			payload: {
@@ -59,17 +62,22 @@ function renderGraph() {
 		},
 	];
 	props.todos.forEach((todo) => {
+		const prevPos = positions.get(todo.id.toString());
 		graph.nodes.push({
 			id: todo.id.toString(),
 			shape: {
 				type: "checkmark",
 				scale: 1,
 			},
-			spawn: {
-				source: todo.done ? "done" : "notdone",
-				angle: Math.random() * 360,
-				distance: 150,
-			},
+			x: prevPos?.x,
+			y: prevPos?.y,
+			spawn: prevPos
+				? undefined
+				: {
+						source: todo.done ? "done" : "notdone",
+						angle: Math.random() * 360,
+						distance: 150,
+				  },
 			payload: {
 				done: todo.done,
 			},
@@ -87,6 +95,15 @@ function nodeClick(e: any, node: Node) {
 	if (node.id === "done" || node.id === "notdone") return;
 	emit("toggle", parseFloat(node.id));
 }
+function nodeDragEnd(e: any, node: Node, pos: { x: number; y: number }) {
+	positions.set(node.id, pos);
+}
+
+function handleTick() {
+	graph.nodes.forEach((node) => {
+		positions.set(node.id, { x: node.x ?? 0, y: node.y ?? 0 });
+	});
+}
 
 onMounted(() => {
 	simulation.value.templateStore.add("checkmark", Checkmark);
@@ -101,5 +118,12 @@ watch(
 
 <template>
 	<h1>Graph</h1>
-	<GraphlyD3 ref="graphly" class="graphly-canvas" @node-click="nodeClick" />
+	<GraphlyD3
+		ref="graphly"
+		class="graphly-canvas"
+		:env-gravity="0"
+		@node-click="nodeClick"
+		@node-drag-end="nodeDragEnd"
+		@simulation-tick="handleTick"
+	/>
 </template>
