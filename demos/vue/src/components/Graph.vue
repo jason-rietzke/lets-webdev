@@ -4,6 +4,7 @@ import { ref, computed, watch, onMounted } from "vue";
 import { ForceSimulation, Graph, Node } from "@livereader/graphly-d3";
 import GraphlyD3 from "@livereader/graphly-d3/component/vue3";
 import "@livereader/graphly-d3/style.css";
+import Anchor from "../templates/anchor";
 import Checkmark from "../templates/checkmark";
 
 const props = defineProps<{ todos: TODOItem[] }>();
@@ -19,6 +20,8 @@ const graph: Graph = {
 	links: [],
 };
 const positions: Map<string, { x: number; y: number }> = new Map();
+let showDone = true;
+let showNotDone = true;
 
 function renderGraph() {
 	simulation.value.draggableNodes;
@@ -27,9 +30,8 @@ function renderGraph() {
 		{
 			id: "done",
 			shape: {
-				type: "demo-hexagon",
+				type: "anchor",
 				scale: 1,
-				url: "https://cdn.graphly.dev/@jason-rietzke/demo-hexagon/1.1.1",
 			},
 			x: 150,
 			y: 0,
@@ -40,15 +42,15 @@ function renderGraph() {
 			},
 			payload: {
 				title: "Done",
+				show: showDone,
 				color: green,
 			},
 		},
 		{
 			id: "notdone",
 			shape: {
-				type: "demo-hexagon",
+				type: "anchor",
 				scale: 1,
-				url: "https://cdn.graphly.dev/@jason-rietzke/demo-hexagon/1.1.1",
 			},
 			anchor: {
 				type: "soft",
@@ -57,12 +59,15 @@ function renderGraph() {
 			},
 			payload: {
 				title: "Not Done",
+				show: showNotDone,
 				color: red,
 			},
 		},
 	];
 	props.todos.forEach((todo) => {
 		const prevPos = positions.get(todo.id.toString());
+		if (todo.done && !showDone) return;
+		if (!todo.done && !showNotDone) return;
 		graph.nodes.push({
 			id: todo.id.toString(),
 			shape: {
@@ -75,8 +80,8 @@ function renderGraph() {
 				? undefined
 				: {
 						source: todo.done ? "done" : "notdone",
-						angle: Math.random() * 360,
-						distance: 150,
+						angle: Math.random() * 180 + (todo.done ? 0 : 180),
+						distance: 400,
 				  },
 			payload: {
 				done: todo.done,
@@ -92,8 +97,14 @@ function renderGraph() {
 }
 
 function nodeClick(e: any, node: Node) {
-	if (node.id === "done" || node.id === "notdone") return;
-	emit("toggle", parseFloat(node.id));
+	if (node.id === "done") {
+		showDone = !showDone;
+	} else if (node.id === "notdone") {
+		showNotDone = !showNotDone;
+	} else {
+		emit("toggle", parseFloat(node.id));
+	}
+	renderGraph();
 }
 function nodeDragEnd(e: any, node: Node, pos: { x: number; y: number }) {
 	positions.set(node.id, pos);
@@ -107,6 +118,7 @@ function handleTick() {
 
 onMounted(() => {
 	simulation.value.templateStore.add("checkmark", Checkmark);
+	simulation.value.templateStore.add("anchor", Anchor);
 	renderGraph();
 });
 watch(
